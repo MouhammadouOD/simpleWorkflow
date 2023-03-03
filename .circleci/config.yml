@@ -48,20 +48,20 @@ jobs:
       - image: cimg/node:12.16
     steps:
       - checkout
-      - run: echo "hello World" > output.txt
+      - run: echo "hello World" > ~/output.txt
       - persist_to_workspace:
-          root: .
+          root: ~/
           paths:
-            - .
-    
+            - output.txt
+
   print_output_file:
     docker:
       - image: cimg/node:12.16
     steps:
       - checkout
       - attach_workspace:
-          at: .
-      - run: cat output.txt
+          at: ~/
+      - run: cat ~/output.txt
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
