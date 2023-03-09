@@ -5,8 +5,11 @@ version: 2.1
 commands:
   print_pipeline_id:
     description: "A command that prints the pipeline ID"
+    parameters:
+      id: 
+        type: string
     steps:
-      - run: echo $CIRCLE_WORKFLOW_ID
+      - run: echo << parameters.id >>
   
 
 # Define a job to be invoked later in a workflow.
@@ -69,7 +72,8 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
-      - print_pipeline_id
+      - print_pipeline_id:
+          id: << pipeline.id >>
 
 
 # Invoke jobs via workflows
