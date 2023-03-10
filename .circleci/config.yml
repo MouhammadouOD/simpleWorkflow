@@ -80,7 +80,7 @@ jobs:
       - image: cimg/node:12.16
     steps:
       - checkout
-      - run: return 1
+      - run: exit 1
       - run: 
           name: step to run on fail
           command: echo 'I run only if my job fails'
