@@ -83,7 +83,7 @@ jobs:
       - run: return 1
       - run: 
           name: step to run on fail
-          command: echo 'hello world'
+          command: echo 'I run only if my job fails'
           when: on_fail
 
 
