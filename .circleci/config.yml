@@ -75,6 +75,17 @@ jobs:
       - print_pipeline_id:
           id: << pipeline.id >>
 
+  failing_job:
+    docker:
+      - image: cimg/node:12.16
+    steps:
+      - checkout
+      - run: return 1
+      - run: 
+          name: step to run on fail
+          command: echo 'hello world'
+          when: on_fail
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -91,3 +102,5 @@ workflows:
           requires: [print_name]
       - print_output_file:
           requires: [save_hello_world_output]
+      - failing_job:
+          requires: [print_output_file]
